@@ -3,16 +3,15 @@ import { Route } from 'react-router';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
-import FetchData from './components/FetchData';
 import SignUpForm from './components/SignUpForm';
-
 import './custom.css'
+import FlashCard from './components/FlashCard';
 
 export default () => (
     <Layout>
         <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
+        <Route path='/about' component={Counter} />
+        <Route path='/flash-cards/' component={FlashCard} />
         <Route path='/SignUpForm' component={SignUpForm} />
     </Layout>
 );
