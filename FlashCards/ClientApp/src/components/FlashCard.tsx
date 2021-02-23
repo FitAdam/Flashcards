@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
-
+import './FlashCard.css';
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Container
@@ -16,8 +16,8 @@ const FlashCard = () => {
 
   
     return (
-      <Container className="themed-container" >
 
+      <div className='box'>
        <ReactCardFlip isFlipped={isFlipped}>
 
           <Card>
@@ -41,10 +41,9 @@ const FlashCard = () => {
       </Card>
 
       </ReactCardFlip>
+      </div>
       
-      
-      </Container>
-     
+   
     );
   }
 
