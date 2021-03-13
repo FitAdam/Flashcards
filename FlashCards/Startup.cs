@@ -1,3 +1,4 @@
+using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,12 @@ namespace FlashCards
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            _ = new ConfigurationBuilder()
+           .SetBasePath(env.ContentRootPath)
+           .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+           .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+           .AddEnvironmentVariables();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -40,7 +47,6 @@ namespace FlashCards
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -49,6 +55,9 @@ namespace FlashCards
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            var repo = new Repository(Configuration.GetConnectionString("DefaultConnection"));
+            repo.OpenConnection(Configuration.GetConnectionString("DefaultConnection")).GetAwaiter();
 
             app.UseEndpoints(endpoints =>
             {
