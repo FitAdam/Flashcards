@@ -1,0 +1,15 @@
+.HomePage {
+  background-color: white;
+  opacity: 95%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 35px;
+  margin-bottom: 100px;
+  max-height: 80%;
+}
+
+h1 {
+  text-align: center;
+}
