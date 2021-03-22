@@ -6,10 +6,35 @@
   padding-left: 3%;
   padding-right: 3%;
   border-radius: 35px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
+  margin-top: 50px;
   max-height: 80%;
+  animation: slide-up 0.7s ease;
 }
 
 h1 {
   text-align: center;
+}
+
+img {
+  height: 700px;
+  width: 100%;
+  object-position: 0% 75%;
+  object-fit: cover;
+  position: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  border-radius: 35px;
+  animation: slide-up 0.7s ease;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
