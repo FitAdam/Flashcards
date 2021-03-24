@@ -24,7 +24,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     <NavLink tag={Link} className="text-white" to="/">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-white" to="/flash-cards">Learn with us</NavLink>
+                                    <NavLink tag={Link} className="text-white" to="/categories">Learn with us</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={Link} className="text-white" to="/about">About</NavLink>

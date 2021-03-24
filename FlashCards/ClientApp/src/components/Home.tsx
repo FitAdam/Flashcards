@@ -1,9 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Button, Jumbotron } from 'reactstrap';
 import './Home.css'
-import FlashCard from '../components/FlashCard';
-import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import Study from '../resources/study.jpg';
 import Cards from '../resources/cards.jpg';
@@ -29,7 +26,7 @@ const Home = () => (
       Prepare for the interview! Just now!</p>
       <p>If you have, for example, a flashcard saying: “What is the capital of France?” You would write “Paris” on the back side.</p>
       <p className="lead">
-      <Link to="/flash-cards" className="btn btn-primary">Learn with us</Link>
+      <Link to="/categories" className="btn btn-primary">Learn with us</Link>
       </p>
     </div>
   </div>
