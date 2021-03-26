@@ -22,10 +22,16 @@ namespace Domain
             _connectionString = connectionString;
         }
 
-        public IEnumerable<Card> GetAllCards()
+        public IEnumerable<Card> GetAllCards(int typeID)
         {
             using var connection = GetConnection(_connectionString).Result;
-            return connection.Query<Card>("SELECT * FROM CARDS");
+            return connection.Query<Card>($"SELECT * FROM CARDS where typeID = '{typeID}'");
+        }
+
+        public IEnumerable<Types> GetAllTypes()
+        {
+            using var connection = GetConnection(_connectionString).Result;
+            return connection.Query<Types>($"SELECT * FROM TYPES");
         }
 
         private async Task<IDbConnection> GetConnection(string connectionString)

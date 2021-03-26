@@ -7,7 +7,7 @@ namespace FlashCards.Controllers
 {
 
     [Produces("application/json")]
-    [Route("Cards")]
+    [Route("Category")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class CardController : Controller
     {
@@ -21,11 +21,18 @@ namespace FlashCards.Controllers
             _repository = new Repository(config.GetConnectionString("DefaultConnection"));
         }
 
-        [HttpGet("All")]
-        [Produces("application/json")]
-        public IEnumerable<object> GetCards()
+        [HttpGet("{type}")]
+        public IEnumerable<object> GetCards(int? type)
         {
-            var output = _repository.GetAllCards();
+            if (type == null || type == 0) return null;
+            var output = _repository.GetAllCards((int)type);
+            return output;
+        }
+
+        [HttpGet("All")]
+        public IEnumerable<object> GetTypes()
+        { 
+            var output = _repository.GetAllTypes();
             return output;
         }
 
