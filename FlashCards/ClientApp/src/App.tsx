@@ -5,13 +5,15 @@ import Home from './components/Home';
 import Counter from './components/Counter';
 import SignUpForm from './components/SignUpForm';
 import './custom.css'
-import FlashCard from './components/FlashCard';
+import Categories from './components/Categories';
 
 export default () => (
-    <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/about' component={Counter} />
-        <Route path='/flash-cards/' component={FlashCard} />
-        <Route path='/SignUpForm' component={SignUpForm} />
-    </Layout>
+    <div className="App">
+        <Layout>
+            <Route exact path='/' component={Home} />
+            <Route path='/about' component={Counter} />
+            <Route path='/categories/' component={Categories} />
+            <Route path='/SignUpForm' component={SignUpForm} />
+        </Layout>
+    </div>
 );
