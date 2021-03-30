@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Categories.css';
 import {
@@ -14,62 +14,66 @@ const Categories = () => {
         setIsCardDisplayed(!isCardDisplayed);
 
     };
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+    // 
+    useEffect(() => {
+        fetch("https://localhost:5001/Category/All")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setItems(result);
+                },
+                // TODO 
+                // Pass data.id into the child component
+                // Think about introducing a colors
+                // :)
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    }, [])
 
-    return (
-        <div>
-            {isCardDisplayed === false && (
-                <div className='box'>
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Loading...</div>;
+    } else {
 
-                    <CardColumns>
-                        <Card>
+        return (
+            <div>
 
-                            <CardBody>
-                                <CardTitle tag="h5">Python Programming language</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">Get Started</CardSubtitle>
-                                <CardText>Python is a programming language that lets you work quickly and integrate systems more effectively.</CardText>
-                                <Button onClick={handleClickToCardView} >Study now!</Button>
-                            </CardBody>
-                        </Card>
-                        <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-                            <CardTitle tag="h5">Programming principles</CardTitle>
-                            <CardText>Basic Programming Principles Every Programmer Must Know.</CardText>
-                            <Button onClick={handleClickToCardView} >Study now!</Button>
-                        </Card>
-                        <Card>
-                            <CardBody>
-                                <CardTitle tag="h5">Algorithms</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">Get Started</CardSubtitle>
-                                <CardText>If you want to become a software engineer, but don’t know where to start, let’s save you the suspense: it’s algorithms and data structures.</CardText>
-                                <Button onClick={handleClickToCardView} >Study now!</Button>
-                            </CardBody>
-                        </Card>
-                        <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-                            <CardTitle tag="h5">Networking</CardTitle>
-                            <CardText>Computer networking refers to connected computing devices (such as laptops, desktops, servers, smartphones, and tablets) and an ever-expanding array of IoT devices (such as cameras, door locks, doorbells, refrigerators, audio/visual systems, thermostats, and various sensors) that communicate with one another.</CardText>
-                            <Button onClick={handleClickToCardView}>Study now!</Button>
-                        </Card>
-                        <Card>
+                {isCardDisplayed === false && (
+                    <div className='box'>
 
-                            <CardBody>
-                                <CardTitle tag="h5">JavaScript</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">Get Started</CardSubtitle>
-                                <CardText>Today, JavaScript is one of the most powerful languages on the planet because of its performance and omnipresence.</CardText>
-                                <Button onClick={handleClickToCardView} >Study now!</Button>
-                            </CardBody>
-                        </Card>
-                        <Card body inverse color="primary">
-                            <CardTitle tag="h5">Special Interview's Questions</CardTitle>
-                            <CardText>Destroy your inteview as she said. </CardText>
-                            <Button color="secondary" onClick={handleClickToCardView}>Study now!</Button>
-                        </Card>
-                    </CardColumns>
-                </div>)}
+                        <CardColumns>
+                            {items.map(item => (
+                                <Card>
 
-            {isCardDisplayed === true && <FlashCard />}
-        </div>
+                                    <CardBody>
+                                        <CardTitle tag="h5">{item.type}</CardTitle>
+                                        <CardSubtitle tag="h6" className="mb-2 text-muted">id={item.id}</CardSubtitle>
+                                        <CardText>Here we will see some description..</CardText>
+                                        <Button onClick={handleClickToCardView} >Study now!</Button>
+                                    </CardBody>
+
+                                </Card>
+                            ))}
+                        </CardColumns>
+                    </div>)}
+
+                {isCardDisplayed === true && <FlashCard />}
+            </div>
 
 
-    );
+        );
+    }
 };
 
 export default connect()(Categories);
