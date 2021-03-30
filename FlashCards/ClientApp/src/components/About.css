@@ -1,46 +1,50 @@
 .AboutPage {
-    background-color: white;
-    opacity: 95%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-left: 3%;
-    padding-right: 3%;
-    border-radius: 35px;
-    margin-bottom: 50px;
-    margin-top: 50px;
-    max-height: 80%;
-    animation: slide-up 0.7s ease;
-  }
-  
-  h1 {
-    text-align: center;
-     color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 64px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
+  background-color: white;
+  opacity: 95%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 35px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  max-height: 80%;
+}
 
+h1 {
+  text-align: center;
+  color: #111;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 64px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
+}
 
-  .lead {
-    font-weight: bold;
+.lead {
+  font-weight: bold;
+}
+
+img {
+  height: 300px;
+  width: 100%;
+  object-position: 0% 75%;
+  object-fit: cover;
+  position: center;
+  margin-bottom: 50px;
+  margin-top: 10px;
+  border-radius: 35px;
+  animation: slide-up 0.7s ease;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  img {
-    height: 300px;
-    width: 100%;
-    object-position: 0% 75%;
-    object-fit: cover;
-    position: center;
-    margin-bottom: 50px;
-    margin-top: 10px;
-    border-radius: 35px;
-    animation: slide-up 0.7s ease;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @keyframes slide-up {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+}
