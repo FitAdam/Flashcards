@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Categories.css';
 import {
-    Card, Button, CardImg, CardTitle, CardText, CardColumns,
+    Card, Button, CardTitle, CardText, CardColumns,
     CardSubtitle, CardBody
 } from 'reactstrap';
 
@@ -10,13 +10,17 @@ import FlashCard from './FlashCard';
 
 const Categories = () => {
     const [isCardDisplayed, setIsCardDisplayed] = useState(false);
-    const handleClickToCardView = () => {
-        setIsCardDisplayed(!isCardDisplayed);
-
-    };
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
+    const [categoryId, setCategoryId] = useState(null)
+    const [categoryType, setCategoryType] = useState(null)
+    const handleClickToCardView = (id, type) => {
+        setIsCardDisplayed(!isCardDisplayed);
+        setCategoryId(id);
+        setCategoryType(type);
+        console.log(id)
+    };
     // 
     useEffect(() => {
         fetch("https://localhost:5001/Category/All")
@@ -51,16 +55,15 @@ const Categories = () => {
 
                 {isCardDisplayed === false && (
                     <div className='box'>
-
                         <CardColumns>
                             {items.map(item => (
                                 <Card>
 
                                     <CardBody>
-                                        <CardTitle tag="h5">{item.type}</CardTitle>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">id={item.id}</CardSubtitle>
+                                        <CardTitle tag="h5" key={"item.type"}>{item.type}</CardTitle>
+                                        <CardSubtitle tag="h6" className="mb-2 text-muted" key={"item.id"} >Category number: {item.id}</CardSubtitle>
                                         <CardText>Here we will see some description..</CardText>
-                                        <Button onClick={handleClickToCardView} >Study now!</Button>
+                                        <Button onClick={() => handleClickToCardView(item.id, item.type)} >Study now!</Button>
                                     </CardBody>
 
                                 </Card>
@@ -68,7 +71,7 @@ const Categories = () => {
                         </CardColumns>
                     </div>)}
 
-                {isCardDisplayed === true && <FlashCard />}
+                {isCardDisplayed === true && <FlashCard id={categoryId} type={categoryType} />}
             </div>
 
 
