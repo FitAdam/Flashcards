@@ -22,7 +22,7 @@ const Home = () => (
     <div className="HomePage">
       <h1>About us</h1>
       <p className="lead">Put simply, a flashcard is a piece of card that has a cue or hint on the front side, and a corresponding answer on the back side.
-      Anything that can be studied in a “question and answer”<div className=""></div>
+      Anything that can be studied in a “question and answer”
       Prepare for the interview! Just now!</p>
       <p>If you have, for example, a flashcard saying: “What is the capital of France?” You would write “Paris” on the back side.</p>
       <p className="lead">

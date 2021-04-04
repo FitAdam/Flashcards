@@ -57,11 +57,11 @@ const Categories = () => {
                     <div className='box'>
                         <CardColumns>
                             {items.map(item => (
-                                <Card>
+                                <Card key={item.id}>
 
                                     <CardBody>
-                                        <CardTitle tag="h5" key={"item.type"}>{item.type}</CardTitle>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted" key={"item.id"} >Category number: {item.id}</CardSubtitle>
+                                        <CardTitle tag="h5" >{item.type}</CardTitle>
+                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Category number: {item.id}</CardSubtitle>
                                         <CardText>Here we will see some description..</CardText>
                                         <Button onClick={() => handleClickToCardView(item.id, item.type)} >Study now!</Button>
                                     </CardBody>

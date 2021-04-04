@@ -7,9 +7,15 @@ import {
   CardTitle, CardSubtitle, Button,
 } from 'reactstrap';
 
+type Props = {
+  id: string,
+  type: string,
+};
 
-
-const FlashCard = (props) => {
+const FlashCard: React.FC<Props> = ({
+  id,
+  type,
+}) => {
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,13 +25,18 @@ const FlashCard = (props) => {
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
-    
+    console.log(items)
   };
+
+  
+  const nextQuestion = () => {
+
+  }
 
  
 
   useEffect(() => {
-    fetch(`https://localhost:5001/Category/${props.id}`)
+    fetch(`https://localhost:5001/Category/${id}`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -49,34 +60,34 @@ const FlashCard = (props) => {
     return (
 
       <div className='box'>
+        {items.slice(0,1).map(item => (
+        <ReactCardFlip isFlipped={isFlipped} key={item.typeID}>
         
-        <ReactCardFlip isFlipped={isFlipped}>
-        
-        <Card>
+        <Card >
           <CardBody>
-            <CardTitle tag="h5">Question from {props.type} </CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">{props.id}</CardSubtitle>
-            <CardText>TODO</CardText>
+            <CardTitle tag="h5">Question from {type} </CardTitle>
+            <CardSubtitle tag="h6" className="mb-2 text-muted">{id}</CardSubtitle>
+            <CardText>{item.front}</CardText>
             <Button className="btn btn-primary" onClick={handleClick} >Press to see answer</Button>
           </CardBody>
           <Button onClick={handleClick} >Go back to categories</Button>
         </Card>
-        
+         
         <Card>
 
           <CardBody>
             <CardTitle tag="h5">Answer</CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">{props.type}</CardSubtitle>
-            <CardText>TODO</CardText>
-            <Button className="btn btn-primary" onClick={handleClick} >Go back to question</Button>
+            <CardSubtitle tag="h6" className="mb-2 text-muted">{type}</CardSubtitle>
+            <CardText>{item.back}</CardText>
+            <Button className="btn btn-primary" onClick={handleClick}> Go back to question</Button>
 
           </CardBody>
 
           <Button onClick={handleClick} >Go back to categories</Button>
         </Card>
-       
+     
         </ReactCardFlip>
-         
+           ))}
       </div>
 
 
