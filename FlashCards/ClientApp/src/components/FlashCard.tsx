@@ -7,6 +7,15 @@ import {
   CardTitle, CardSubtitle, Button,
 } from 'reactstrap';
 
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+  CarouselCaption
+} from 'reactstrap';
+
+
 type Props = {
   id: string,
   type: string,
@@ -25,15 +34,28 @@ const FlashCard: React.FC<Props> = ({
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
-    console.log(items)
   };
 
-  
-  const nextQuestion = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [animating, setAnimating] = useState(false);
 
+  const next = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(nextIndex);
   }
 
- 
+  const previous = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    setActiveIndex(nextIndex);
+  }
+
+  const goToIndex = (newIndex) => {
+    if (animating) return;
+    setActiveIndex(newIndex);
+  }
+
 
   useEffect(() => {
     fetch(`https://localhost:5001/Category/${id}`)
@@ -56,41 +78,59 @@ const FlashCard: React.FC<Props> = ({
     return <div>Loading...</div>;
   } else {
 
+    const slides = items.map((item) => {
+      return (
+        <CarouselItem
+          onExiting={() => setAnimating(true)}
+          onExited={() => setAnimating(false)}
+          key={item.src}
+        >
+          <div className='box'>
+            <ReactCardFlip isFlipped={isFlipped} key={item.typeID}>
+
+              <Card >
+                <CardBody>
+                  <CardTitle tag="h5">{type} </CardTitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted">Question:</CardSubtitle>
+                  <CardText>{item.front}</CardText>
+
+                </CardBody>
+                <Button className="btn btn-primary" onClick={handleClick} >Press to see answer</Button>
+              </Card>
+
+              <Card>
+
+                <CardBody>
+                  <CardTitle tag="h5">{type}</CardTitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted">Answer</CardSubtitle>
+                  <CardText>{item.back}</CardText>
+
+
+                </CardBody>
+                <Button className="btn btn-primary" onClick={handleClick}> Go back to question</Button>
+              </Card>
+
+            </ReactCardFlip>
+          </div>
+
+          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+        </CarouselItem>
+      );
+    });
 
     return (
+      <Carousel
 
-      <div className='box'>
-        {items.slice(0,1).map(item => (
-        <ReactCardFlip isFlipped={isFlipped} key={item.typeID}>
-        
-        <Card >
-          <CardBody>
-            <CardTitle tag="h5">Question from {type} </CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">{id}</CardSubtitle>
-            <CardText>{item.front}</CardText>
-            <Button className="btn btn-primary" onClick={handleClick} >Press to see answer</Button>
-          </CardBody>
-          <Button onClick={handleClick} >Go back to categories</Button>
-        </Card>
-         
-        <Card>
-
-          <CardBody>
-            <CardTitle tag="h5">Answer</CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">{type}</CardSubtitle>
-            <CardText>{item.back}</CardText>
-            <Button className="btn btn-primary" onClick={handleClick}> Go back to question</Button>
-
-          </CardBody>
-
-          <Button onClick={handleClick} >Go back to categories</Button>
-        </Card>
-     
-        </ReactCardFlip>
-           ))}
-      </div>
-
-
+        activeIndex={activeIndex}
+        next={next}
+        previous={previous}
+        interval={false} 
+      >
+        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+        {slides}
+        <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+        <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+      </Carousel>
     );
   }
 }
