@@ -12,7 +12,6 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption
 } from 'reactstrap';
 
 
@@ -51,7 +50,7 @@ const FlashCard: React.FC<Props> = ({
     setActiveIndex(nextIndex);
   }
 
-  const goToIndex = (newIndex) => {
+  function goToIndex(newIndex: number){
     if (animating) return;
     setActiveIndex(newIndex);
   }
@@ -83,10 +82,10 @@ const FlashCard: React.FC<Props> = ({
         <CarouselItem
           onExiting={() => setAnimating(true)}
           onExited={() => setAnimating(false)}
-          key={item.src}
+          key={item.id}
         >
           <div className='box'>
-            <ReactCardFlip isFlipped={isFlipped} key={item.typeID}>
+            <ReactCardFlip isFlipped={isFlipped} >
 
               <Card >
                 <CardBody>
@@ -113,7 +112,6 @@ const FlashCard: React.FC<Props> = ({
             </ReactCardFlip>
           </div>
 
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );
     });

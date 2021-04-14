@@ -15,7 +15,9 @@ const Categories = () => {
     const [items, setItems] = useState([]);
     const [categoryId, setCategoryId] = useState(null)
     const [categoryType, setCategoryType] = useState(null)
-    const handleClickToCardView = (id, type) => {
+
+   
+    function handleClickToCardView(id: string, type: string){
         setIsCardDisplayed(!isCardDisplayed);
         setCategoryId(id);
         setCategoryType(type);
@@ -62,7 +64,7 @@ const Categories = () => {
                                     <CardBody>
                                         <CardTitle tag="h5" >{item.type}</CardTitle>
                                         <CardSubtitle tag="h6" className="mb-2 text-muted">Category number: {item.id}</CardSubtitle>
-                                        <CardText>Here we will see some description..</CardText>
+                                        <CardText></CardText>
                                         <Button onClick={() => handleClickToCardView(item.id, item.type)} >Study now!</Button>
                                     </CardBody>
 
