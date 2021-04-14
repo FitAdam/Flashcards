@@ -16,13 +16,18 @@ const Categories = () => {
     const [categoryId, setCategoryId] = useState(null)
     const [categoryType, setCategoryType] = useState(null)
 
-   
+    
     function handleClickToCardView(id: string, type: string){
         setIsCardDisplayed(!isCardDisplayed);
         setCategoryId(id);
         setCategoryType(type);
-        console.log(id)
+        //console.log(id)
     };
+
+    function handleClickToCategories(){
+        setIsCardDisplayed(!isCardDisplayed);
+    };
+
     // 
     useEffect(() => {
         fetch("https://localhost:5001/Category/All")
@@ -74,6 +79,8 @@ const Categories = () => {
                     </div>)}
 
                 {isCardDisplayed === true && <FlashCard id={categoryId} type={categoryType} />}
+                {isCardDisplayed === true && (<Button onClick={() => handleClickToCategories()} >Go back to Categories</Button>)}
+                
             </div>
 
 

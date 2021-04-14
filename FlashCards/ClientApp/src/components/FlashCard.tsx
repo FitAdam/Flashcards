@@ -101,7 +101,7 @@ const FlashCard: React.FC<Props> = ({
 
                 <CardBody>
                   <CardTitle tag="h5">{type}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Answer</CardSubtitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted">Answer:</CardSubtitle>
                   <CardText>{item.back}</CardText>
 
 
