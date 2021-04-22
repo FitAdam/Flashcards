@@ -41,12 +41,14 @@ const FlashCard: React.FC<Props> = ({
   const next = () => {
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    setIsFlipped(false);
     setActiveIndex(nextIndex);
   }
 
   const previous = () => {
     if (animating) return;
     const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    setIsFlipped(false);
     setActiveIndex(nextIndex);
   }
 
