@@ -89,7 +89,7 @@ const FlashCard: React.FC<Props> = ({
           <div className='box'>
             <ReactCardFlip isFlipped={isFlipped} >
 
-              <Card >
+              <Card>
                 <CardBody>
                   <CardTitle tag="h5">{type} </CardTitle>
                   <CardSubtitle tag="h6" className="mb-2 text-muted">Question:</CardSubtitle>
