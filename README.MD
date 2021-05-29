@@ -1,16 +1,16 @@
-# FlashCards 
+﻿# FlashCards 
 
-The purpose of this product is to help students learn Computer Science concepts through the use of flashcards which are provided through a web application. The sources of the information for the product came from a Github Open-Source project
+The purpose of this project is to help students to learn Computer Science concepts. The web application provides access to categorized computer science flash cards enriched by attractive animations. 
 
-The product is planned to be a responsive web application offering a good user experience with low latency, attractive design and UI supporting various screen sizes. The user should be able to learn software engineering concepts anytime and anywhere through the use of flashcards.
+The responsive web application offers a good user experience with low latency, attractive design and UI supporting various screen sizes. The user can learn software engineering concepts anytime and anywhere.
 
 ## Technologies
 
-.NET Core 3.1
-React.js 16.11.0,
-TypeScript
-Reactstrap
-CSS
+* .NET Core 3.1
+* React.js 16.11.0
+* TypeScript
+* ReactStrap
+* CSS
 
 ## Setup
 
@@ -20,13 +20,19 @@ To run this project:
 $ cd ..\flashcards\FlashCards> 
 $ dotnet run
 ```
-go to localhost
+
+**open this link in your browser:**
+> https://localhost:5001
+
+**or this one:**
+> http://localhost:5000
+
 
 ### Wood Division's members:
 
-Adam Project Supervisor
-Eddie Backend Manager
-FitAdam Frontend Manager
-Arnas Backend Developer
+1. Adam Project Supervisor
+2. Eddie Backend Manager
+3. FitAdam Frontend Manager
+4. Arnas Database Developer
 
 
